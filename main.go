@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"time"
 
 	_ "github.com/lib/pq"
 )
@@ -96,7 +97,11 @@ func getSsqResultFromURL(issue int) (string, string, string, error) {
 		return "", "", "", errors.New("status code wrong")
 	}
 
-	fmt.Println(string(body))
+	if result.Number == "" {
+		time.Sleep(1 * time.Minute)
+		fmt.Println("调用次数过快，稍等", string(body))
+		return getSsqResultFromURL(issue)
+	}
 
 	fmt.Println("result:", resp.StatusCode, result.Number, result.Issue, result.Time)
 
