@@ -26,8 +26,14 @@ func main() {
 		return
 	}
 
-	startNum := 2024050
-	for i := 0; i < 64; i++ {
+	startNum := 0
+	currentIssue := 2024114
+	err = db.QueryRow("select max(issue) from ssq_history").Scan(&startNum)
+	if err != nil {
+		startNum = 2024050
+	}
+	fmt.Println(startNum)
+	for i := 0; i < currentIssue-startNum; i++ {
 		num, issue, time, err := getSsqResultFromURL(startNum + i)
 		if err != nil {
 			break
