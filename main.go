@@ -31,10 +31,10 @@ func main() {
 	currentIssue := 2024114
 	err = db.QueryRow("select max(issue) from ssq_history").Scan(&startNum)
 	if err != nil {
-		startNum = 2024050
+		startNum = 2024049
 	}
 	fmt.Println(startNum)
-	for i := 0; i < currentIssue-startNum; i++ {
+	for i := 1; i <= currentIssue-startNum; i++ {
 		num, issue, time, err := getSsqResultFromURL(startNum + i)
 		if err != nil {
 			break
