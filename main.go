@@ -15,11 +15,13 @@ import (
 func main() {
 	db, err := sql.Open("postgres", "postgres://ivorysql:123456@localhost:5432")
 	if err != nil {
+		fmt.Println("error: db open error")
 		return
 	}
 
 	err = db.Ping()
 	if err != nil {
+		fmt.Println("error: db connection error")
 		return
 	}
 
