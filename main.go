@@ -96,6 +96,8 @@ func getSsqResultFromURL(issue int) (string, string, string, error) {
 		return "", "", "", errors.New("status code wrong")
 	}
 
+	fmt.Println(string(body))
+
 	fmt.Println("result:", resp.StatusCode, result.Number, result.Issue, result.Time)
 
 	return result.Number, result.Issue, result.Time, nil
