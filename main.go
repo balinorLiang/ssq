@@ -13,7 +13,8 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("postgres", "postgres://ivorysql:123456@localhost:5432")
+	connStr := "host=127.0.0.1 port=5432 user=ivorysql password=123456 dbname=ivorysql sslmode=disable"
+	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		fmt.Println("error: db open error")
 		return
